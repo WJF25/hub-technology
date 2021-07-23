@@ -10,7 +10,7 @@ import api from "../../services/api";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 toast.configure();
 
@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function Login() {
+export function Login({ authentication, setAuthentication }) {
   const classes = useStyles();
   const history = useHistory();
 
@@ -58,15 +58,25 @@ export function Login() {
 
   const onSubmit = (data) => {
     api
-      .post("https://kenziehub.me/sessions", data)
+      .post("/sessions", data)
       .then((response) => {
-        history.push(`/login/${data.name}`);
+        const { token } = response;
+
+        localStorage.setItem("@KenzieHub:token", JSON.stringify(token));
+
+        setAuthentication(true);
+
+        return history.push(`/home/${response.user.name}`);
       })
       .catch((err) => {
-        notify("E-mail ou senha incorreto");
+        notify("E-mail ou senha incorretos");
         console.log(err);
       });
   };
+
+  if (authentication) {
+    return <Redirect to="/home/" />;
+  }
 
   return (
     <>

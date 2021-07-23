@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import api from "../../services/api";
-
+import { Link, Redirect } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -51,7 +51,7 @@ const schema = yup.object().shape({
   course_module: yup.string(),
 });
 
-export function SignUp() {
+export function SignUp({ authentication }) {
   const history = useHistory();
   const classes = useStyles();
 
@@ -67,13 +67,17 @@ export function SignUp() {
     api
       .post("https://kenziehub.me/users", data)
       .then((response) => {
-        history.push(`/login/${data.name}`);
+        history.push(`/login`);
       })
       .catch((err) => {
         notify("E-mail já existe");
         console.log(err);
       });
   };
+
+  if (authentication) {
+    return <Redirect to="/home/" />;
+  }
 
   return (
     <>
@@ -132,7 +136,9 @@ export function SignUp() {
         <Button type="submit" variant="contained" color="primary">
           Cadastrar
         </Button>
-        <p className="paragrafo">Já tem uma conta? Login</p>
+        <p className="paragrafo">
+          Já tem uma conta? <Link to="/login">Logar</Link>
+        </p>
       </form>
     </>
   );
