@@ -1,15 +1,78 @@
+body {
+  margin: 0;
+}
+
 .Card {
-  margin: 20px auto;
-  width: 30%;
-  box-shadow: 10px 10px 0px rgba(133, 129, 129, 0.575);
-  border: 1px solid blue;
+  margin: 50px auto 0 auto;
+  width: 50%;
+  box-shadow: 10px 10px 6px rgba(26, 25, 25, 0.575);
+  border: 1px solid rgba(57, 57, 58, 0.342);
+  padding: 10px;
+  border-radius: 20px;
+  animation: sudden 1s ease-out forwards;
 }
 
 .Card p,
 .Card li {
   text-align: center;
+  text-shadow: 6px 4px 4px rgba(11, 107, 151, 0.788);
+  color: blue;
+}
+
+.Card p {
+  margin: 0;
+}
+
+.Card .paragrafoCard {
+  margin: 8px;
+  text-transform: capitalize;
+}
+
+.Card .poseButton {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
 
 .Card button {
   margin: 0 10px;
+  background-color: rgba(250, 235, 215, 0.445);
+  cursor: pointer;
+}
+
+.Card ul {
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  align-items: center;
+}
+
+.Card li {
+  flex: 1;
+  border: 1px solid rgba(128, 128, 128, 0.301);
+  width: 20%;
+  margin: 5px;
+  box-shadow: 5px 4px 6px rgba(128, 128, 128, 0.692);
+  padding: 10px;
+  list-style-type: none;
+  height: 100px;
+}
+
+.Card li:hover {
+  box-shadow: 0px 0px 5px rgb(207, 55, 55);
+}
+
+.Card span {
+  color: rgba(255, 0, 0, 0.822);
+  margin: 10px;
+}
+
+@keyframes sudden {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

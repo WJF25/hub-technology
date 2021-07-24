@@ -2,19 +2,30 @@ import "./card.css";
 export function ExibitionCard({ nome, curso, tecnologia, handleClickDelete }) {
   return (
     <div className="Card">
-      <p>Nome:{nome}</p>
-      <p>Curso-Modulo:{curso}</p>
+      <p className="paragrafoCard">
+        {" "}
+        <span>Nome:</span>
+        {nome}
+      </p>
+      <p className="paragrafoCard">
+        <span>Curso-Modulo:</span>
+        {curso}
+      </p>
+      <p className="paragrafoCard">Tecnologias Conhecidas</p>
       <ul>
-        <p>Tencnologias Conhecidas</p>
         {tecnologia.map((item) => (
           <>
             <li key={item.id}>
-              {item.title}
-              <button onClick={() => handleClickDelete(item.id)}>
-                Deletar
-              </button>
-              <br></br>
-              <p>Status: {item.status}</p>
+              <div className="poseButton">
+                {item.title}
+                <button onClick={() => handleClickDelete(item.id)}>
+                  Deletar
+                </button>
+              </div>
+
+              <p>
+                <span>Status:</span> {item.status}
+              </p>
             </li>{" "}
           </>
         ))}

@@ -1,17 +1,23 @@
+body {
+  margin: 0;
+}
+
 .paragrafo {
   width: 50%;
   margin: 0 auto;
   text-align: center;
+  color: rgb(0, 140, 255);
 }
 
 .tituloLogin {
   text-align: center;
   width: 50%;
-  margin: 1% auto;
+  margin: 0 auto;
   color: blue;
   font-family: "Orbitron", sans-serif;
   animation: fromUp 2s ease-out;
   font-size: 40px;
+  text-shadow: 6px 8px 5px rgba(11, 107, 151, 0.788);
 }
 
 @keyframes fromUp {

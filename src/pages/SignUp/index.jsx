@@ -1,5 +1,4 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { useForm } from "react-hook-form";
@@ -19,18 +18,6 @@ const notify = (erro) => {
     position: toast.POSITION.TOP_CENTER,
   });
 };
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& > *": {
-      // margin: theme.spacing(1),
-      width: "45ch",
-      display: "flex",
-      flexDirection: "column",
-      margin: "10px auto",
-    },
-  },
-}));
 
 const schema = yup.object().shape({
   email: yup.string().required("Email obrigatório").email("Email inválido"),
@@ -54,7 +41,6 @@ const schema = yup.object().shape({
 
 export function SignUp({ authentication }) {
   const history = useHistory();
-  const classes = useStyles();
 
   const {
     register,
@@ -86,6 +72,7 @@ export function SignUp({ authentication }) {
       <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
         <p style={{ color: "red" }}>{errors.email?.message}</p>
         <TextField
+          style={{ color: " rgb(235, 255, 59)" }}
           id="outlined-basic"
           label="email"
           variant="outlined"

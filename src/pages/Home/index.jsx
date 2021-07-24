@@ -13,11 +13,6 @@ import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import InputLabel from "@material-ui/core/InputLabel";
-import Select from "@material-ui/core/Select";
-import FormControl from "@material-ui/core/FormControl";
 import { FiMenu, FiSearch, FiEdit, FiBookOpen, FiLoader } from "react-icons/fi";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -140,12 +135,19 @@ export function Home({ authentication, user2 }) {
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = useState(null);
+  const [rendery, setRendery] = useState(true);
 
   const handleClick = (event) => {
+    console.log(event);
     setAnchorEl(event.currentTarget);
   };
 
+  const handleClick2 = (param) => {
+    setRendery(param);
+  };
+
   const handleClose = () => {
+    console.log("gosh");
     setAnchorEl(null);
   };
 
@@ -168,7 +170,7 @@ export function Home({ authentication, user2 }) {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        console.log("crinhado");
+        notify("Sucesso Tech Cadastrada");
       })
       .catch((err) => {
         notify("Tecnologia já existe");
@@ -183,7 +185,7 @@ export function Home({ authentication, user2 }) {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        console.log("crinhado");
+        console.log("Já elvis");
       })
       .catch((err) => {
         notify("Erro ao Deletar, tente novamente mais tarde.");
@@ -216,22 +218,26 @@ export function Home({ authentication, user2 }) {
             onClose={handleClose}
           >
             <StyledMenuItem>
-              <ListItemIcon>
-                <FiLoader fontSize="20px" />
-              </ListItemIcon>
-              <ListItemText primary="Criar" />
+              <FiLoader fontSize="20px" />
+              <button
+                onClick={() => handleClick2(false)}
+                className="buttonList"
+              >
+                Criar
+              </button>
+              <FiLoader fontSize="20px" />
             </StyledMenuItem>
             <StyledMenuItem>
-              <ListItemIcon>
-                <FiEdit fontSize="20px" />
-              </ListItemIcon>
-              <ListItemText primary="Atualizar" />
+              <FiEdit fontSize="20px" />
+              <button className="buttonList">Atualizar</button>
+              <FiEdit fontSize="20px" />
             </StyledMenuItem>
             <StyledMenuItem>
-              <ListItemIcon>
-                <FiBookOpen fontSize="20px" />
-              </ListItemIcon>
-              <ListItemText primary="Mostrar Todas" />
+              <FiBookOpen fontSize="20px" />
+              <button onClick={() => handleClick2(true)} className="buttonList">
+                Ver Todas
+              </button>
+              <FiBookOpen fontSize="20px" />
             </StyledMenuItem>
           </StyledMenu>
           <Typography className={classes.title} variant="h6" noWrap>
@@ -253,54 +259,51 @@ export function Home({ authentication, user2 }) {
         </Toolbar>
       </AppBar>
 
-      <h1>Bem vindo {user}</h1>
+      <h1 className="tituloHome">
+        Bem vindo <span>{user}</span>
+      </h1>
+      {!rendery && (
+        <form
+          id="formTech"
+          className={classes.root1}
+          noValidate
+          autoComplete="on"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <h3>Cadastrar Nova Tech</h3>
+          <p style={{ color: "red" }}>{errors.title?.message}</p>
+          <TextField
+            id="outlined-basic"
+            label="Title"
+            variant="outlined"
+            type="text"
+            {...register("title")}
+          />
+          <p style={{ color: "red" }}>{errors.status?.message}</p>
+          <TextField
+            id="outlined-basic"
+            label="Status"
+            variant="outlined"
+            type="text"
+            {...register("status")}
+          />
 
-      <form
-        id="formTech"
-        className={classes.root1}
-        noValidate
-        autoComplete="on"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <h3>Cadastrar Nova Tech</h3>
-        <p style={{ color: "red" }}>{errors.title?.message}</p>
-        <TextField
-          id="outlined-basic"
-          label="Title"
-          variant="outlined"
-          type="text"
-          {...register("title")}
-        />
-        <p style={{ color: "red" }}>{errors.status?.message}</p>
-        <TextField
-          id="outlined-basic"
-          label="Status"
-          variant="outlined"
-          type="text"
-          {...register("status")}
-        />
+          <Button type="submit" variant="contained" color="secondary">
+            Cadastrar
+          </Button>
+        </form>
+      )}
 
-        {/* <InputLabel id="status">Status</InputLabel>
-        <p style={{ color: "red" }}>{errors.status?.message}</p>
-        <Select variant="outlined" labelId="status" value="status">
-          <option value="Iniciante">Iniciante</option>
-          <option value="Intermediário">Intermediário</option>
-          <option value="Avançado">Avançado</option>
-        </Select> */}
-
-        <Button type="submit" variant="contained" color="secondary">
-          Cadastrar
-        </Button>
-      </form>
-      {user2.map((item) => (
-        <ExibitionCard
-          key={item.id}
-          nome={item.name}
-          curso={item.course_module}
-          tecnologia={item.techs}
-          handleClickDelete={handleClickDelete}
-        />
-      ))}
+      {rendery &&
+        user2.map((item) => (
+          <ExibitionCard
+            key={item.id}
+            nome={item.name}
+            curso={item.course_module}
+            tecnologia={item.techs}
+            handleClickDelete={handleClickDelete}
+          />
+        ))}
     </div>
   );
 }

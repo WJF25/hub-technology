@@ -1,5 +1,5 @@
 import "./style.css";
-import { FiMail, FiKey } from "react-icons/fi";
+
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -11,7 +11,6 @@ import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link, Redirect } from "react-router-dom";
-import { useState } from "react";
 
 toast.configure();
 
@@ -92,6 +91,7 @@ export function Login({ authentication, setAuthentication, setUser2 }) {
         autoComplete="off"
         onSubmit={handleSubmit(onSubmit)}
       >
+        <p style={{ color: "white" }}>{errors.email?.message}</p>
         <TextField
           id="outlined-basic"
           label="E-mail"
@@ -99,7 +99,7 @@ export function Login({ authentication, setAuthentication, setUser2 }) {
           type="email"
           {...register("email")}
         />
-        {errors.email?.message}
+        <p style={{ color: "white" }}>{errors.password?.message}</p>
         <TextField
           id="outlined-basic"
           type="password"
@@ -107,7 +107,7 @@ export function Login({ authentication, setAuthentication, setUser2 }) {
           variant="outlined"
           {...register("password")}
         />
-        {errors.password?.message}
+
         <Button type="submit" variant="contained" color="primary">
           Login
         </Button>

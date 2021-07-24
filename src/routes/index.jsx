@@ -3,6 +3,7 @@ import { Login } from "../pages/Login/index";
 import { SignUp } from "../pages/SignUp/index";
 import { Home } from "../pages/Home/index";
 import { useEffect, useState } from "react";
+import "./route.css";
 
 function Routes() {
   const [authentication, setAuthentication] = useState(false);
@@ -17,7 +18,7 @@ function Routes() {
   }, [authentication]);
   console.log(localStorage.getItem("@kenziehub:token"));
   return (
-    <div>
+    <div className="divPrincipal">
       <Switch>
         <Route path="/signup">
           <SignUp authentication={authentication} />

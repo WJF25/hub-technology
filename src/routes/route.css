@@ -1,0 +1,13 @@
+.divPrincipal {
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 102, 255, 0.74) 0%,
+    rgba(0, 128, 0, 0.705) 20%,
+    rgba(255, 166, 0, 0.623) 40%,
+    rgba(238, 130, 238, 0.623) 60%,
+    rgba(0, 128, 0, 0.705) 80%,
+    rgba(0, 102, 255, 0.74) 100%
+  );
+  min-height: 100vh;
+  margin: 0;
+}
