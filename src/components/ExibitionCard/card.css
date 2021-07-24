@@ -1,6 +1,15 @@
 .Card {
-  margin: 0 auto;
+  margin: 20px auto;
   width: 30%;
   box-shadow: 10px 10px 0px rgba(133, 129, 129, 0.575);
   border: 1px solid blue;
+}
+
+.Card p,
+.Card li {
+  text-align: center;
+}
+
+.Card button {
+  margin: 0 10px;
 }

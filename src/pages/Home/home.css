@@ -1,0 +1,11 @@
+h3 {
+  text-align: center;
+  color: rgba(255, 0, 0, 0.726);
+}
+
+#formTech {
+  border: 2px solid rgba(82, 81, 81, 0.644);
+  box-shadow: 8px 10px 5px gray;
+  background-image: linear-gradient(210deg, #2688de99 0%, #cddef8bf 100%);
+  filter: blur(0.5);
+}

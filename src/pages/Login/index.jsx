@@ -85,6 +85,7 @@ export function Login({ authentication, setAuthentication, setUser2 }) {
 
   return (
     <>
+      <h1 className="tituloLogin">Faça seu Login </h1>
       <form
         className={classes.root}
         noValidate
@@ -110,10 +111,10 @@ export function Login({ authentication, setAuthentication, setUser2 }) {
         <Button type="submit" variant="contained" color="primary">
           Login
         </Button>
+        <p className="paragrafo">
+          Não tem uma conta? <Link to="/signup">Cadastre-se</Link>
+        </p>
       </form>
-      <p className="paragrafo">
-        Não tem uma conta? <Link to="/signup">Cadastre-se</Link>
-      </p>
     </>
   );
 }

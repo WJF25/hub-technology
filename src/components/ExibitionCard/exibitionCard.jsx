@@ -8,7 +8,7 @@ export function ExibitionCard({ nome, curso, tecnologia, handleClickDelete }) {
         <p>Tencnologias Conhecidas</p>
         {tecnologia.map((item) => (
           <>
-            <li>
+            <li key={item.id}>
               {item.title}
               <button onClick={() => handleClickDelete(item.id)}>
                 Deletar

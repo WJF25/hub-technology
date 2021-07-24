@@ -1,4 +1,5 @@
 import React from "react";
+import "./home.css";
 import { ExibitionCard } from "../../components/ExibitionCard/exibitionCard";
 import { useState } from "react";
 import { Redirect, useParams } from "react-router-dom";
@@ -67,6 +68,7 @@ const useStyles = makeStyles((theme) => ({
       width: "35ch",
       display: "flex",
       margin: "10px auto",
+      flexDirection: "column",
     },
   },
   menuButton: {
@@ -135,7 +137,6 @@ const schema = yup.object().shape({
 });
 
 export function Home({ authentication, user2 }) {
-  console.log(user2);
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -185,7 +186,7 @@ export function Home({ authentication, user2 }) {
         console.log("crinhado");
       })
       .catch((err) => {
-        notify("Tecnologia já existe");
+        notify("Erro ao Deletar, tente novamente mais tarde.");
         console.log(err);
       });
   };
@@ -255,6 +256,7 @@ export function Home({ authentication, user2 }) {
       <h1>Bem vindo {user}</h1>
 
       <form
+        id="formTech"
         className={classes.root1}
         noValidate
         autoComplete="on"
@@ -272,7 +274,7 @@ export function Home({ authentication, user2 }) {
         <p style={{ color: "red" }}>{errors.status?.message}</p>
         <TextField
           id="outlined-basic"
-          label="status"
+          label="Status"
           variant="outlined"
           type="text"
           {...register("status")}

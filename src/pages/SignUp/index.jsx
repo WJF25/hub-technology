@@ -10,6 +10,7 @@ import { Link, Redirect } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "./style.css";
 
 toast.configure();
 
@@ -81,13 +82,8 @@ export function SignUp({ authentication }) {
 
   return (
     <>
-      <h1>Faça seu Cadastro</h1>
-      <form
-        className={classes.root}
-        noValidate
-        autoComplete="off"
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <h1 className="tituloSignup">Faça seu Cadastro</h1>
+      <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
         <p style={{ color: "red" }}>{errors.email?.message}</p>
         <TextField
           id="outlined-basic"
@@ -134,11 +130,14 @@ export function SignUp({ authentication }) {
           {...register("course_module")}
         />
 
-        <Button type="submit" variant="contained" color="primary">
+        <Button id="bf" type="submit" variant="contained" color="primary">
           Cadastrar
         </Button>
         <p className="paragrafo">
-          Já tem uma conta? <Link to="/login">Logar</Link>
+          Já tem uma conta?{" "}
+          <Link classname="linktologin" to="/login">
+            Logar
+          </Link>
         </p>
       </form>
     </>
