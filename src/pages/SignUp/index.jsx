@@ -35,20 +35,20 @@ const schema = yup.object().shape({
   email: yup.string().required("Email obrigatório").email("Email inválido"),
   password: yup
     .string()
-    .required()
+    .required("Celular é obrigatório")
     .min(6, "A senha deve ter pelo menos 6 caracteres")
     .matches(
       /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
       "Senha precisa ter ao menos 8 caracteres, 1 letra maiuscula, 1 número e um caracter especial ex: %"
     ),
-  name: yup.string().required("Nome obrigatório").max(18),
+  name: yup.string().required("Nome obrigatório").max(28),
   bio: yup.string(),
   contact: yup
     .string("Somente Números")
     .required("Celular obrigatório")
     .min(10)
     .matches(/(\d+)| /g),
-  course_module: yup.string(),
+  course_module: yup.string().required("Curso e Módulo são obrigatótios"),
 });
 
 export function SignUp({ authentication }) {
@@ -88,13 +88,14 @@ export function SignUp({ authentication }) {
         autoComplete="off"
         onSubmit={handleSubmit(onSubmit)}
       >
+        <p style={{ color: "red" }}>{errors.email?.message}</p>
         <TextField
           id="outlined-basic"
           label="email"
           variant="outlined"
           {...register("email")}
         />
-        {errors.email?.message}
+        <p style={{ color: "red" }}>{errors.password?.message}</p>
         <TextField
           id="outlined-basic"
           type="password"
@@ -102,14 +103,14 @@ export function SignUp({ authentication }) {
           variant="outlined"
           {...register("password")}
         />
-        {errors.password?.message}
+        <p style={{ color: "red" }}>{errors.name?.message}</p>
         <TextField
           id="outlined-basic"
           label="name"
           variant="outlined"
           {...register("name")}
         />
-        {errors.name?.message}
+        <p style={{ color: "red" }}>{errors.bio?.message}</p>
         <TextField
           id="outlined-basic"
           multiline
@@ -118,21 +119,21 @@ export function SignUp({ authentication }) {
           variant="outlined"
           {...register("bio")}
         />
-        {errors.bio?.message}
+        <p style={{ color: "red" }}>{errors.contact?.message}</p>
         <TextField
           id="outlined-basic"
           label="contact"
           variant="outlined"
           {...register("contact")}
         />
-        {errors.contact?.message}
+        <p style={{ color: "red" }}>{errors.course_module?.message}</p>
         <TextField
           id="outlined-basic"
           label="course_module"
           variant="outlined"
           {...register("course_module")}
         />
-        {errors.course_module?.message}
+
         <Button type="submit" variant="contained" color="primary">
           Cadastrar
         </Button>

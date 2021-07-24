@@ -11,6 +11,7 @@ import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link, Redirect } from "react-router-dom";
+import { useState } from "react";
 
 toast.configure();
 
@@ -44,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function Login({ authentication, setAuthentication }) {
+export function Login({ authentication, setAuthentication, setUser2 }) {
   const classes = useStyles();
   const history = useHistory();
 
@@ -58,15 +59,19 @@ export function Login({ authentication, setAuthentication }) {
 
   const onSubmit = (data) => {
     api
-      .post("/sessions", data)
-      .then((response) => {
-        const { token } = response;
+      .post("https://kenziehub.me/sessions", data)
 
-        localStorage.setItem("@KenzieHub:token", JSON.stringify(token));
+      .then((response) => {
+        console.log(response);
+        const {
+          data: { token },
+        } = response;
+        console.log(token);
+        localStorage.setItem("@Kenziehub:token", JSON.stringify(token));
 
         setAuthentication(true);
-
-        return history.push(`/home/${response.user.name}`);
+        setUser2([response.data.user]);
+        return history.push(`/home/${response.data.user.name}`);
       })
       .catch((err) => {
         notify("E-mail ou senha incorretos");
@@ -103,7 +108,7 @@ export function Login({ authentication, setAuthentication }) {
         />
         {errors.password?.message}
         <Button type="submit" variant="contained" color="primary">
-          Cadastrar
+          Login
         </Button>
       </form>
       <p className="paragrafo">
