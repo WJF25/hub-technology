@@ -18,7 +18,7 @@ export function ExibitionCard({ nome, curso, tecnologia, handleClickDelete }) {
             <li key={item.id}>
               <div className="poseButton">
                 {item.title}
-                <button onClick={() => handleClickDelete(item.id)}>
+                <button onClick={() => handleClickDelete(item.id, item.title)}>
                   Deletar
                 </button>
               </div>

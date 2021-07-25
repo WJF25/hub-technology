@@ -16,7 +16,7 @@ function Routes() {
       return setAuthentication(true);
     }
   }, [authentication]);
-  console.log(localStorage.getItem("@kenziehub:token"));
+
   return (
     <div className="divPrincipal">
       <Switch>
@@ -31,7 +31,11 @@ function Routes() {
           />
         </Route>
         <Route path="/home/:user">
-          <Home authentication={authentication} user2={user2} />
+          <Home
+            authentication={authentication}
+            user2={user2}
+            setUser2={setUser2}
+          />
         </Route>
       </Switch>
     </div>

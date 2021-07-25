@@ -27,7 +27,7 @@ const StyledMenu = withStyles({
   },
 })((props) => (
   <Menu
-    elevation={0}
+    elevation={1}
     getContentAnchorEl={null}
     anchorOrigin={{
       vertical: "bottom",
@@ -131,14 +131,13 @@ const schema = yup.object().shape({
   status: yup.string().required("Status é obrigatório"),
 });
 
-export function Home({ authentication, user2 }) {
+export function Home({ authentication, user2, setUser2 }) {
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [rendery, setRendery] = useState(true);
 
   const handleClick = (event) => {
-    console.log(event);
     setAnchorEl(event.currentTarget);
   };
 
@@ -147,7 +146,6 @@ export function Home({ authentication, user2 }) {
   };
 
   const handleClose = () => {
-    console.log("gosh");
     setAnchorEl(null);
   };
 
@@ -160,10 +158,10 @@ export function Home({ authentication, user2 }) {
   });
 
   const { user } = useParams();
-
+  console.log(user2);
   //Posta na API a tecnologia
   const onSubmit = (data) => {
-    let token = JSON.parse(localStorage.getItem("@kenziehub:token"));
+    const token = JSON.parse(localStorage.getItem("@Kenziehub:token"));
     console.log(token);
     api
       .post("https://kenziehub.me/users/techs", data, {
@@ -178,14 +176,14 @@ export function Home({ authentication, user2 }) {
       });
   };
   //Colocar essa função no botão das listas criadas com o map das tecnologias
-  const handleClickDelete = (data) => {
-    const token = JSON.parse(localStorage.getItem("@kenziehub:token"));
+  const handleClickDelete = (data, tek) => {
+    const token = JSON.parse(localStorage.getItem("@Kenziehub:token"));
     api
-      .delete(`https://kenziehub.me/users/${data}`, {
+      .delete(`https://kenziehub.me/users/techs/${data}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        console.log("Já elvis");
+        notify(`Tech ${tek} excluída com sucesso`);
       })
       .catch((err) => {
         notify("Erro ao Deletar, tente novamente mais tarde.");

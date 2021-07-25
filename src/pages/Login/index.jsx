@@ -88,7 +88,7 @@ export function Login({ authentication, setAuthentication, setUser2 }) {
       <form
         className={classes.root}
         noValidate
-        autoComplete="off"
+        autoComplete="on"
         onSubmit={handleSubmit(onSubmit)}
       >
         <p style={{ color: "white" }}>{errors.email?.message}</p>
