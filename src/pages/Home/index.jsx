@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./home.css";
 import { ExibitionCard } from "../../components/ExibitionCard/exibitionCard";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 import api from "../../services/api";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -133,9 +133,10 @@ const schema = yup.object().shape({
 
 export function Home({ authentication, user2, setUser2 }) {
   const classes = useStyles();
+  console.log(user2);
 
   const [token] = useState(
-    JSON.parse(localStorage.getItem("@Kenziehub:token"))
+    JSON.parse(localStorage.getItem("@Kenziehub:token") || "")
   );
   const [anchorEl, setAnchorEl] = useState(null);
   const [rendery, setRendery] = useState(true);
@@ -170,13 +171,14 @@ export function Home({ authentication, user2, setUser2 }) {
       .post("https://kenziehub.me/users/techs", data, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((_) => {
+      .then((response) => {
         notify("Sucesso Tech Cadastrada");
       })
       .catch((err) => {
         notify("Tecnologia já existe");
         console.log(err);
       });
+    return update();
   };
   //Colocar essa função no botão das listas criadas com o map das tecnologias
   const handleClickDelete = (data, tek) => {
@@ -191,7 +193,31 @@ export function Home({ authentication, user2, setUser2 }) {
         toast.error("Erro ao Deletar, tente novamente mais tarde.");
         console.log(err);
       });
+    return update();
   };
+
+  const update = () => {
+    const id = JSON.parse(localStorage.getItem("@Kenziehub:id"));
+
+    api
+      .get(`https://kenziehub.me/users/${id}`)
+      .then((response) => {
+        setUser2([response.data]);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    if (user2) {
+      update();
+    }
+    // eslint-disable-next-line
+  }, [user2]);
+
+  console.log(authentication);
+  if (!authentication) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <div className={classes.root}>

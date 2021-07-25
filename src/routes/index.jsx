@@ -11,7 +11,7 @@ function Routes() {
   const [user2, setUser2] = useState([]);
 
   useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("@kenziehub:token"));
+    const token = JSON.parse(localStorage.getItem("@Kenziehub:token"));
 
     if (token) {
       return setAuthentication(true);
