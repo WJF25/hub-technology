@@ -3,6 +3,7 @@ import { Login } from "../pages/Login/index";
 import { SignUp } from "../pages/SignUp/index";
 import { Home } from "../pages/Home/index";
 import { useEffect, useState } from "react";
+import { Entrada } from "../pages/Entrada/enter";
 import "./route.css";
 
 function Routes() {
@@ -20,6 +21,9 @@ function Routes() {
   return (
     <div className="divPrincipal">
       <Switch>
+        <Route exact path="/">
+          <Entrada />
+        </Route>
         <Route path="/signup">
           <SignUp authentication={authentication} />
         </Route>
