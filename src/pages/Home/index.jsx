@@ -2,7 +2,7 @@ import React from "react";
 import "./home.css";
 import { ExibitionCard } from "../../components/ExibitionCard/exibitionCard";
 import { useState } from "react";
-import { Redirect, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import api from "../../services/api";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -134,6 +134,9 @@ const schema = yup.object().shape({
 export function Home({ authentication, user2, setUser2 }) {
   const classes = useStyles();
 
+  const [token] = useState(
+    JSON.parse(localStorage.getItem("@Kenziehub:token"))
+  );
   const [anchorEl, setAnchorEl] = useState(null);
   const [rendery, setRendery] = useState(true);
 
@@ -158,16 +161,16 @@ export function Home({ authentication, user2, setUser2 }) {
   });
 
   const { user } = useParams();
-  console.log(user2);
+
   //Posta na API a tecnologia
   const onSubmit = (data) => {
-    const token = JSON.parse(localStorage.getItem("@Kenziehub:token"));
-    console.log(token);
+    console.log(data);
+
     api
       .post("https://kenziehub.me/users/techs", data, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((response) => {
+      .then((_) => {
         notify("Sucesso Tech Cadastrada");
       })
       .catch((err) => {
@@ -177,23 +180,18 @@ export function Home({ authentication, user2, setUser2 }) {
   };
   //Colocar essa função no botão das listas criadas com o map das tecnologias
   const handleClickDelete = (data, tek) => {
-    const token = JSON.parse(localStorage.getItem("@Kenziehub:token"));
     api
       .delete(`https://kenziehub.me/users/techs/${data}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((response) => {
+      .then((_) => {
         notify(`Tech ${tek} excluída com sucesso`);
       })
       .catch((err) => {
-        notify("Erro ao Deletar, tente novamente mais tarde.");
+        toast.error("Erro ao Deletar, tente novamente mais tarde.");
         console.log(err);
       });
   };
-
-  if (!authentication) {
-    return <Redirect to="/login" />;
-  }
 
   return (
     <div className={classes.root}>
@@ -265,7 +263,7 @@ export function Home({ authentication, user2, setUser2 }) {
           id="formTech"
           className={classes.root1}
           noValidate
-          autoComplete="on"
+          autoComplete="off"
           onSubmit={handleSubmit(onSubmit)}
         >
           <h3>Cadastrar Nova Tech</h3>

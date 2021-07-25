@@ -79,7 +79,7 @@ export function Login({ authentication, setAuthentication, setUser2 }) {
   };
 
   if (authentication) {
-    return <Redirect to="/home/" />;
+    return <Redirect to="/home/:user" />;
   }
 
   return (

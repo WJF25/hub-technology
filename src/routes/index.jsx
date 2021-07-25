@@ -22,7 +22,7 @@ function Routes() {
     <div className="divPrincipal">
       <Switch>
         <Route exact path="/">
-          <Entrada />
+          <Entrada authentication={authentication} />
         </Route>
         <Route path="/signup">
           <SignUp authentication={authentication} />

@@ -59,6 +59,8 @@ body {
   list-style-type: none;
   height: 100px;
   flex-grow: 0;
+  background-color: rgba(235, 234, 190, 0.678);
+  border-radius: 8px;
 }
 
 .Card li:hover {

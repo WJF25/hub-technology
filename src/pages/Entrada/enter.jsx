@@ -1,8 +1,9 @@
 import { useHistory } from "react-router";
 import Button from "@material-ui/core/Button";
 import "./enter.css";
+import { Redirect } from "react-router-dom";
 
-export function Entrada() {
+export function Entrada({ authentication }) {
   const history = useHistory();
   const toLogin = () => {
     return history.push("/login");
@@ -11,6 +12,10 @@ export function Entrada() {
   const toSignUp = () => {
     return history.push("/signup");
   };
+
+  if (authentication) {
+    return <Redirect to="/home/:user" />;
+  }
 
   return (
     <>
