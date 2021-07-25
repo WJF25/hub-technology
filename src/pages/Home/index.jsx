@@ -133,7 +133,6 @@ const schema = yup.object().shape({
 
 export function Home({ authentication, user2, setUser2 }) {
   const classes = useStyles();
-  console.log(user2);
 
   const [token] = useState(
     JSON.parse(localStorage.getItem("@Kenziehub:token") || "")
@@ -165,8 +164,6 @@ export function Home({ authentication, user2, setUser2 }) {
 
   //Posta na API a tecnologia
   const onSubmit = (data) => {
-    console.log(data);
-
     api
       .post("https://kenziehub.me/users/techs", data, {
         headers: { Authorization: `Bearer ${token}` },
@@ -214,7 +211,6 @@ export function Home({ authentication, user2, setUser2 }) {
     // eslint-disable-next-line
   }, [user2]);
 
-  console.log(authentication);
   if (!authentication) {
     return <Redirect to="/" />;
   }
