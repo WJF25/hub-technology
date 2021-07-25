@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./home.css";
 import { ExibitionCard } from "../../components/ExibitionCard/exibitionCard";
 import { useState } from "react";
-import { Redirect, useParams } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import api from "../../services/api";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -160,7 +160,7 @@ export function Home({ authentication, user2, setUser2 }) {
     resolver: yupResolver(schema),
   });
 
-  const { user } = useParams();
+  const user3 = JSON.parse(localStorage.getItem("@Kenziehub:name"));
 
   //Posta na API a tecnologia
   const onSubmit = (data) => {
@@ -202,6 +202,7 @@ export function Home({ authentication, user2, setUser2 }) {
         setUser2([response.data]);
       })
       .catch((err) => console.log(err));
+    return user2;
   };
 
   useEffect(() => {
@@ -278,7 +279,7 @@ export function Home({ authentication, user2, setUser2 }) {
       </AppBar>
 
       <h1 className="tituloHome">
-        Bem vindo <span>{user}</span>
+        Bem vindo <span>{`${user3}`}</span>
       </h1>
       {!rendery && (
         <form

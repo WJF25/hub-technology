@@ -54,6 +54,7 @@ export function SignUp({ authentication }) {
     api
       .post("https://kenziehub.me/users", data)
       .then((response) => {
+        notify("Cadastro realizado com sucesso");
         history.push(`/login`);
       })
       .catch((err) => {

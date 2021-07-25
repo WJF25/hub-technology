@@ -67,10 +67,14 @@ export function Login({ authentication, setAuthentication, setUser2 }) {
           data: {
             user: { id },
           },
+          data: {
+            user: { name },
+          },
         } = response;
         console.log(token);
         localStorage.setItem("@Kenziehub:token", JSON.stringify(token));
         localStorage.setItem("@Kenziehub:id", JSON.stringify(id));
+        localStorage.setItem("@Kenziehub:name", JSON.stringify(name));
 
         setAuthentication(true);
         setUser2([response.data.user]);
