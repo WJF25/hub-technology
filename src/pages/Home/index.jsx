@@ -145,7 +145,6 @@ export function Home({ authentication, user2, setUser2, setAuthentication }) {
   };
 
   const handleClick2 = (param) => {
-    update();
     setRendery(param);
   };
 
@@ -181,8 +180,8 @@ export function Home({ authentication, user2, setUser2, setAuthentication }) {
         notify("Tecnologia já existe");
         console.log(err);
       });
-    return update();
   };
+
   //Colocar essa função no botão das listas criadas com o map das tecnologias
   const handleClickDelete = (data, tek) => {
     api
@@ -196,7 +195,7 @@ export function Home({ authentication, user2, setUser2, setAuthentication }) {
         toast.error("Erro ao Deletar, tente novamente mais tarde.");
         console.log(err);
       });
-    return update();
+    setRendery("n");
   };
 
   const update = () => {
@@ -215,7 +214,7 @@ export function Home({ authentication, user2, setUser2, setAuthentication }) {
       update();
     }
     // eslint-disable-next-line
-  }, [user2]);
+  }, [rendery]);
 
   if (!authentication) {
     return <Redirect to="/" />;
