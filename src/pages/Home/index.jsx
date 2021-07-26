@@ -145,9 +145,8 @@ export function Home({ authentication, user2, setUser2, setAuthentication }) {
   };
 
   const handleClick2 = (param) => {
-    setTimeout(() => {
-      setRendery(param);
-    }, 2000);
+    update();
+    setRendery(param);
   };
 
   const handleClose = () => {
@@ -187,7 +186,7 @@ export function Home({ authentication, user2, setUser2, setAuthentication }) {
   //Colocar essa função no botão das listas criadas com o map das tecnologias
   const handleClickDelete = (data, tek) => {
     api
-      .delete(`/techs/${data}`, {
+      .delete(`users/techs/${data}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((_) => {
@@ -209,7 +208,6 @@ export function Home({ authentication, user2, setUser2, setAuthentication }) {
         setUser2([response.data]);
       })
       .catch((err) => console.log(err));
-    return user2;
   };
 
   useEffect(() => {
@@ -314,12 +312,7 @@ export function Home({ authentication, user2, setUser2, setAuthentication }) {
             {...register("status")}
           />
 
-          <Button
-            type="submit"
-            variant="contained"
-            color="secondary"
-            onClick={() => handleClick2(true)}
-          >
+          <Button type="submit" variant="contained" color="secondary">
             Cadastrar
           </Button>
         </form>
