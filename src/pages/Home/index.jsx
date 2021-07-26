@@ -158,6 +158,7 @@ export function Home({ authentication, user2, setUser2, setAuthentication }) {
   };
 
   const {
+    reset,
     register,
     handleSubmit,
     formState: { errors },
@@ -175,6 +176,7 @@ export function Home({ authentication, user2, setUser2, setAuthentication }) {
       })
       .then((response) => {
         notify("Sucesso Tech Cadastrada");
+        reset();
       })
       .catch((err) => {
         notify("Tecnologia já existe");
@@ -190,6 +192,7 @@ export function Home({ authentication, user2, setUser2, setAuthentication }) {
       })
       .then((_) => {
         notify(`Tech ${tek} excluída com sucesso`);
+        update();
       })
       .catch((err) => {
         toast.error("Erro ao Deletar, tente novamente mais tarde.");
