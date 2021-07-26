@@ -58,7 +58,7 @@ export function Login({ authentication, setAuthentication, setUser2 }) {
 
   const onSubmit = (data) => {
     api
-      .post("https://kenziehub.me/sessions", data)
+      .post("/sessions", data)
 
       .then((response) => {
         console.log(response);

@@ -39,6 +39,7 @@ function Routes() {
             authentication={authentication}
             user2={user2}
             setUser2={setUser2}
+            setAuthentication={setAuthentication}
           />
         </Route>
       </Switch>

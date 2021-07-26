@@ -131,11 +131,11 @@ const schema = yup.object().shape({
   status: yup.string().required("Status é obrigatório"),
 });
 
-export function Home({ authentication, user2, setUser2 }) {
+export function Home({ authentication, user2, setUser2, setAuthentication }) {
   const classes = useStyles();
 
   const [token] = useState(
-    JSON.parse(localStorage.getItem("@Kenziehub:token") || "")
+    JSON.parse(localStorage.getItem("@Kenziehub:token"))
   );
   const [anchorEl, setAnchorEl] = useState(null);
   const [rendery, setRendery] = useState(true);
@@ -145,11 +145,18 @@ export function Home({ authentication, user2, setUser2 }) {
   };
 
   const handleClick2 = (param) => {
-    setRendery(param);
+    setTimeout(() => {
+      setRendery(param);
+    }, 2000);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const LogOut = () => {
+    localStorage.clear();
+    setAuthentication(false);
   };
 
   const {
@@ -165,7 +172,7 @@ export function Home({ authentication, user2, setUser2 }) {
   //Posta na API a tecnologia
   const onSubmit = (data) => {
     api
-      .post("https://kenziehub.me/users/techs", data, {
+      .post("/users/techs", data, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -180,7 +187,7 @@ export function Home({ authentication, user2, setUser2 }) {
   //Colocar essa função no botão das listas criadas com o map das tecnologias
   const handleClickDelete = (data, tek) => {
     api
-      .delete(`https://kenziehub.me/users/techs/${data}`, {
+      .delete(`/techs/${data}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((_) => {
@@ -197,7 +204,7 @@ export function Home({ authentication, user2, setUser2 }) {
     const id = JSON.parse(localStorage.getItem("@Kenziehub:id"));
 
     api
-      .get(`https://kenziehub.me/users/${id}`)
+      .get(`/users/${id}`)
       .then((response) => {
         setUser2([response.data]);
       })
@@ -279,7 +286,7 @@ export function Home({ authentication, user2, setUser2 }) {
       </AppBar>
 
       <h1 className="tituloHome">
-        Bem vindo <span>{`${user3}`}</span>
+        Bem vindo <span>{`${user3 ? user3 : null}`}</span>
       </h1>
       {!rendery && (
         <form
@@ -307,7 +314,12 @@ export function Home({ authentication, user2, setUser2 }) {
             {...register("status")}
           />
 
-          <Button type="submit" variant="contained" color="secondary">
+          <Button
+            type="submit"
+            variant="contained"
+            color="secondary"
+            onClick={() => handleClick2(true)}
+          >
             Cadastrar
           </Button>
         </form>
@@ -323,6 +335,14 @@ export function Home({ authentication, user2, setUser2 }) {
             handleClickDelete={handleClickDelete}
           />
         ))}
+      <Button
+        type="submit"
+        onClick={() => LogOut()}
+        variant="contained"
+        color="secondary"
+      >
+        Log Out
+      </Button>
     </div>
   );
 }
