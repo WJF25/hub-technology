@@ -212,6 +212,24 @@ export function Home({ authentication, user2, setUser2, setAuthentication }) {
       .catch((err) => console.log(err));
   };
 
+  const updateTech = (data, itemId, tek) => {
+    const edit = { status: data };
+
+    api
+      .put(`users/techs/${itemId}`, edit, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((_) => {
+        notify(`Tech ${tek} editada com sucesso`);
+        update();
+      })
+      .catch((err) => {
+        toast.error("Erro ao Editar, tente novamente mais tarde.");
+        console.log(err);
+      });
+    setRendery("n");
+  };
+
   useEffect(() => {
     if (user2) {
       update();
@@ -328,6 +346,7 @@ export function Home({ authentication, user2, setUser2, setAuthentication }) {
             curso={item.course_module}
             tecnologia={item.techs}
             handleClickDelete={handleClickDelete}
+            updateTech={updateTech}
           />
         ))}
       <Button

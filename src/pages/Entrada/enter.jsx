@@ -21,8 +21,8 @@ export function Entrada({ authentication }) {
     <>
       <h1 className="tituloLogin">Kenzie Hub</h1>
       <p className="paragrafoEnt">
-        Cadastre-se numa rede de Developers e mostreu seus jobs e também quais
-        tecnologias tem conheciento.
+        Cadastre-se numa rede de Developers e mostre seus jobs e também quais
+        tecnologias você tem conheciento.
       </p>
       <div className="containerButtonsEnt">
         <Button id="bt1" onClick={toLogin} variant="contained" color="primary">

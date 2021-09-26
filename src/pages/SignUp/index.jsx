@@ -23,7 +23,7 @@ const schema = yup.object().shape({
   email: yup.string().required("Email obrigatório").email("Email inválido"),
   password: yup
     .string()
-    .required("Celular é obrigatório")
+    .required("Senha é obrigatório")
     .min(6, "A senha deve ter pelo menos 6 caracteres")
     .matches(
       /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
