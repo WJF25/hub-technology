@@ -272,11 +272,6 @@ export function Home({ authentication, user2, setUser2, setAuthentication }) {
               <FiLoader fontSize="20px" />
             </StyledMenuItem>
             <StyledMenuItem>
-              <FiEdit fontSize="20px" />
-              <button className="buttonList">Atualizar</button>
-              <FiEdit fontSize="20px" />
-            </StyledMenuItem>
-            <StyledMenuItem>
               <FiBookOpen fontSize="20px" />
               <button onClick={() => handleClick2(true)} className="buttonList">
                 Ver Todas
