@@ -58,9 +58,13 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   root1: {
+    width: "70%",
+    [theme.breakpoints.up("sm")]: {
+      width: "40%",
+    },
     "& > *": {
       // margin: theme.spacing(1),
-      width: "35ch",
+      width: "70%",
       display: "flex",
       margin: "10px auto",
       flexDirection: "column",

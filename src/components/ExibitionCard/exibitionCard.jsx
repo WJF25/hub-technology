@@ -27,7 +27,7 @@ export function ExibitionCard({
         <span>Curso-Modulo:</span>
         {curso}
       </p>
-      <p className="paragrafoCard">Tecnologias Conhecidas</p>
+      <p className="paragrafoCardTitle">Tecnologias Conhecidas</p>
       <ul>
         {tecnologia.map((item) => (
           <>

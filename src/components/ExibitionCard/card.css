@@ -3,8 +3,8 @@ body {
 }
 
 .Card {
-  margin: 50px auto 0 auto;
-  width: 50%;
+  margin: 50px auto 20px auto;
+  width: 80%;
   box-shadow: 10px 10px 6px rgba(26, 25, 25, 0.575);
   border: 1px solid rgba(57, 57, 58, 0.342);
   padding: 10px;
@@ -30,6 +30,13 @@ body {
 .Card .paragrafoCard {
   margin: 8px;
   text-transform: capitalize;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.Card .paragrafoCardTitle {
+  text-transform: uppercase;
+  font-size: 0.9rem;
 }
 
 .Card .poseButton {
@@ -72,7 +79,7 @@ body {
 
 .Card li {
   border: 1px solid rgba(128, 128, 128, 0.301);
-  width: 145px;
+  width: 160px;
   margin: 5px;
   box-shadow: 5px 4px 6px rgba(128, 128, 128, 0.692);
   padding: 10px;
@@ -109,5 +116,19 @@ body {
 
   100% {
     transform: translateY();
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .Card {
+    width: 50%;
+  }
+
+  .Card .paragrafoCard {
+    font-size: 1.2rem;
+  }
+
+  .Card .paragrafoCardTitle {
+    font-size: 2rem;
   }
 }
