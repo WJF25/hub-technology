@@ -13,7 +13,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import { FiMenu, FiSearch, FiEdit, FiBookOpen, FiLoader } from "react-icons/fi";
+import { FiMenu, FiSearch, FiBookOpen, FiLoader } from "react-icons/fi";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
